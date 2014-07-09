@@ -12,6 +12,8 @@ getUser();
 function getUser(){
     // look inside cookie and get user information
 
+    var cookiedata = document.cookie;
+
     // create a user object for quick access to roles and authorization
     user = {};
     user.authorization = ''; // admin - cookie data

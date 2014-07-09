@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        // set cookie
+
+        document.cookie = 'name=jacob;';
+        document.cookie = 'role=admin';
+
+        var cookiedata = document.cookie;
+
+        var cookies = cookiedata.split(';');
+        console.log(cookies);
+
+        var user = {};
+
+        for (var i = 0; i < cookies.length; i++) {
+            var split_cookie = cookies[i].split('=');
+            console.log(split_cookie);
+            user[split_cookie[0]] = split_cookie[1];
+        }
+
+        console.log(user);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
