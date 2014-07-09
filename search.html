@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script>
+
+
+        var customers = JSON.parse(localStorage.getItem('Customers'));
+        var results = _.where(customers, { Country:'Germany', City:'Berlin' });
+
+        // page load boilerplate
+        // keydown on the searchbox
+        // extract the country name from  box
+        // look inside collection
+        // show the customer which belong to the country
+
+        document.addEventListener('DOMContentLoaded', function (){
+
+            // enter event on search box
+            document.getElementById('btn_search').addEventListener('click', function (){
+
+                var inp = document.getElementById('inp_countryname');
+                console.log(inp.placeholder);
+
+                var country_name = inp.value;
+
+                var results = _.where(
+                        customers,
+                        {
+                            Country: country_name
+                        }
+                );
+
+                console.log(results);
+
+
+
+            });
+
+            var table = tableGenerator([{
+                name: 'jacob',
+                role: 'admin'
+            }, {
+                name: 'hamid'
+            }, {
+                name: 'jyotika',
+                certification: 'mongodb'
+            }]);
+            document.body.appendChild(table);
+
+            //
+
+        });
+
+
+
+
+        function tableGenerator(arr_objects) {
+            var arr_headers = [];
+            for (var i = 0, len = arr_objects.length; i < len; i++) {
+                var eac_obj = arr_objects[i];
+                var keys = Object.keys(eac_obj);
+
+                for (var j = 0; j < keys.length; j++) {
+                    var key = keys[j];
+                    if (arr_headers.indexOf(key) === -1) {
+                        arr_headers.push(key);
+                    }
+                }
+
+            }
+            console.log(arr_headers);
+
+            // build table
+            // build tbody
+            // build a tr
+            // build the th elements
+
+            var table = document.createElement('table');
+            var tbody = document.createElement('tbody');
+            var tr = document.createElement('tr');
+
+            table.appendChild(tbody);
+            tbody.appendChild(tr);
+
+
+
+            for (i = 0; i < arr_headers.length; i++) {
+                var th = document.createElement('th');
+                th.innerHTML = arr_headers[i];
+                tr.appendChild(th);
+            }
+
+            // console.log(table);
+
+            for (i = 0; i < arr_objects.length; i++) {
+                var each_obj = arr_objects[i];
+                //console.log(each_obj);
+
+                var tri = document.createElement('tr');
+
+                for (j = 0; j < arr_headers.length; j++) {
+
+                    var propertyname = arr_headers[j];
+                    var tdj = document.createElement('td');
+                    if (propertyname in each_obj) {
+                        tdj.innerHTML = each_obj[propertyname];
+                    } else {
+                        tdj.innerHTML = '';
+                    }
+                    tri.appendChild(tdj);
+
+                }
+
+                tbody.appendChild(tri);
+
+            }
+
+            console.log(table);
+            return table;
+
+        }
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+<input type="text" placeholder="search for customers by country .... " value="asdf" id="inp_countryname"/>
+<label for="customerid">Show customer id</label> <input type="checkbox" id="customerid" name="customerid"/>
+<button id="btn_search">Search</button>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<form>
+    <input type="text" name="username"/>
+    <input type="password" name="password"/>
+    <input type="submit"/>
+</form>
+
+
+
+</body>
+</html>
