@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jyotika.js"></script>
+    <script>
+
+        // NOT Stantdard OR Generic --- untested
+
+        recursiveLookup(restCountriesJB);
+
+        function recursiveLookup(obj){
+
+            for (var prop in obj) {
+                var type = getClass(obj[prop]);
+                console.log(type);
+                if (type === 'Function') {
+                    var functiondef = obj[prop].toString().match(/function\s\((.+)\)/);
+                    console.log(functiondef && functiondef.length > 1 ? prop + ': ' + functiondef[1].split(',').length : functiondef);
+                } else if (type === 'Object') {
+                    console.log(prop);
+                    recursiveLookup(obj[prop]);
+                }
+
+            }
+
+        }
+
+        function getClass(obj) {
+            var data  =Object.prototype.toString.call(obj).match(/\[object\s(.+)\]/);
+            return data[1];
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
