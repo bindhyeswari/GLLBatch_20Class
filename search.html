@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="js/authenticate.js"></script>
     <script>
 
 
@@ -39,16 +40,21 @@
 
             });
 
-            var table = tableGenerator([{
-                name: 'jacob',
-                role: 'admin'
-            }, {
-                name: 'hamid'
-            }, {
-                name: 'jyotika',
-                certification: 'mongodb'
-            }]);
-            document.body.appendChild(table);
+
+            // access to the login form
+            var loginform = document.forms[0];
+            loginform.addEventListener('submit', function(event){
+                event.preventDefault();
+
+                var username = event.target.username.value;
+                var password = event.target.password.value;
+                console.log('username: ' + username +
+                '; password is ' + password);
+
+                login(username, password);
+                getUser();
+            });
+
 
             //
 
@@ -122,6 +128,8 @@
             return table;
 
         }
+
+
 
 
 
