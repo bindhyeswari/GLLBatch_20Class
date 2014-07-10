@@ -12,20 +12,9 @@
 
         var cookiedata = document.cookie;
 
-        console.log(cookiedata);
+        console.log(cookiedata.match(/(.+)\b/g));
 
-        var cookies = cookiedata.split(';');
-        console.log(cookies);
 
-        var user = {};
-
-        for (var i = 0; i < cookies.length; i++) {
-            var split_cookie = cookies[i].split('=');
-            console.log(split_cookie);
-            user[split_cookie[0]] = split_cookie[1];
-        }
-
-        console.log(user);
 
 
     </script>

@@ -8,6 +8,22 @@
 
         // NOT Stantdard OR Generic --- untested
 
+        var obj_inps = {
+
+            callback : function(data){
+                console.log(data);
+            },
+
+            str : 'data.somemodule.somefunction',
+            url : 'http://restcountries.eu/rest/v1',
+            cc : 7,
+            callc : 7,
+            cname : 'Kenya',
+            region : 'Asia',
+            subregion : 'western asia',
+            capital : 'Oslo'
+        };
+
         recursiveLookup(restCountriesJB);
 
         function recursiveLookup(obj){
@@ -17,7 +33,22 @@
                 console.log(type);
                 if (type === 'Function') {
                     var functiondef = obj[prop].toString().match(/function\s\((.+)\)/);
-                    console.log(functiondef && functiondef.length > 1 ? prop + ': ' + functiondef[1].split(',').length : functiondef);
+
+                    if (functiondef && functiondef.length > 1) {
+                      console.log(functiondef[1].split(','));
+
+                        var args = functiondef[1].split(', ').map(function(argname){
+                            return obj_inps[argname];
+                        });
+
+                        obj[prop].apply(null, args);
+
+                        console.log(args);
+
+
+                    }
+
+                    //console.log(functiondef && functiondef.length > 1 ? prop + ': ' + functiondef[1].split(',') : functiondef);
                 } else if (type === 'Object') {
                     console.log(prop);
                     recursiveLookup(obj[prop]);
